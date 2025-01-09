@@ -1,6 +1,8 @@
 import pandas as pd
 #import matplotlib.pyplot as plt
 
+#Exercice 1
+
 def get_clean_file(file_path):
     return (pd.read_csv(file_path, sep=';', encoding='utf-8')
             .drop_duplicates())
@@ -18,6 +20,7 @@ cinemas= get_clean_file("./data/cinemas.csv")
 cinemas_columns = [
     #On garde les valeurs utiles à la réalisation de l'exercice*
     "commune",
+    "région administrative",
     "écrans",
     "fauteuils",
     "entrées 2022",
@@ -28,6 +31,12 @@ cinemas_columns = [
 cinemas_filtered_columns = get_interesting_colums(cinemas, cinemas_columns)
 statistiques = pd.DataFrame(cinemas_filtered_columns)
 
-print("cinemas infos")
-print(statistiques.head())
+# print("cinemas infos")
+# print(statistiques.head())
 
+#Exercice 2
+
+cinemas['entrées par fauteuil 2022'] = cinemas["entrées 2022"] / cinemas["fauteuils"]
+entrée_moyenne_par_région = cinemas.groupby('région administrative')['entrées par fauteuil 2022'].mean()
+
+print(entrée_moyenne_par_région)
