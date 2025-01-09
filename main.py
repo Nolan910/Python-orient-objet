@@ -1,5 +1,5 @@
 import pandas as pd
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 #------------------#Exercice 1------------------
 
@@ -43,9 +43,18 @@ entrée_moyenne_par_région = cinemas.groupby('région administrative')['entrée
 #print(entrée_moyenne_par_région)
 
 meilleures_régions = entrée_moyenne_par_région.sort_values(ascending=False)
-print("Les 3 régions ayant les meilleurs résultats")
-print(meilleures_régions.head(3))
+# print("Les 3 régions ayant les meilleurs résultats")
+# print(meilleures_régions.head(3))
 
 pires_régions = entrée_moyenne_par_région.sort_values(ascending=True)
-print("Les 3 régions ayant les pires résultats")
-print(pires_régions.head(3))
+# print("Les 3 régions ayant les pires résultats")
+# print(pires_régions.head(3))
+
+#Graphique à barres des moyennes par régions
+entrée_moyenne_par_région.sort_values().plot(kind="bar", figsize=(12, 6))
+plt.title('Entrées moyennes par fauteuil pour les 10 régions')
+plt.xlabel('Régions')
+plt.ylabel('Entrées par fauteuil')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
