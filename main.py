@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+from sklearn.linear_model import LinearRegression
 
 #------------------#Exercice 1------------------
 
@@ -95,8 +96,8 @@ f_valeur_a_diviser = math.sqrt((f_nombre_total_de_valeurs * f_somme_carre_fauteu
 
 f_correlation = f_soustraction / f_valeur_a_diviser
 
-print("Corrélation entre le nombre de fauteuils et les entrées de 2022")
-print(f_correlation)
+# print("Corrélation entre le nombre de fauteuils et les entrées de 2022")
+# print(f_correlation)
 
 
 #Corrélation écrans/entrées
@@ -127,5 +128,35 @@ e_valeur_a_diviser = math.sqrt((e_nombre_total_de_valeurs * e_somme_carre_écran
 
 e_correlation = e_soustraction / e_valeur_a_diviser
 
-print("Corrélation entre le nombre d'écrans et les entrées de 2022")
-print(e_correlation)
+# print("Corrélation entre le nombre d'écrans et les entrées de 2022")
+# print(e_correlation)
+
+
+#Nuage de points fauteuils
+plt.scatter(fauteuils, entrées_2022)
+x = fauteuils.values.reshape(-1, 1)
+y = entrées_2022.values
+
+model = LinearRegression()
+model.fit(x, y)
+prediction = model.predict(x)
+plt.plot(fauteuils, prediction, color='red', label='Régression linéaire')
+plt.title("Nuage de points avec régression linéaire")
+plt.xlabel("Nombre de fauteuils")
+plt.ylabel("Entrées 2022")
+plt.show()
+
+
+#Nuage de points écrans
+plt.scatter(écrans, entrées_2022)
+x = écrans.values.reshape(-1, 1)
+y = entrées_2022.values
+
+model = LinearRegression()
+model.fit(x, y)
+prediction = model.predict(x)
+plt.plot(écrans, prediction, color='blue', label='Régression linéaire')
+plt.title("Nuage de points avec régression linéaire")
+plt.xlabel("Nombre d'écrans")
+plt.ylabel("Entrées 2022")
+plt.show()
